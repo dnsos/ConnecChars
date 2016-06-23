@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Force Layout Test</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/d3.min.js"></script>
+
+  </head>
+  <body>
+
+    <script>
+
+    // variablen
+    var cWidth  = 1280
+    var cHeight = 760
+    var radius = 16
+    var primaryColor = "rgb(210, 15, 15)"
+
+    // erzeugt den canvas
+    var canvas = d3.select("body").append("svg")
+        .attr("width",  cWidth)
+        .attr("height", cHeight)
+
+    // erzeugt das force layout
+    var force = d3.layout.force()
+        .gravity(0.05) // "gravity" zum center des canvas
+        .linkDistance( function(d) { return d.distance * 30 }) // links distance
+        .charge(-400) // fürs abstoßen der Nodes?!
+        .size([cWidth, cHeight])
+
+
+    // holt sich die Daten
+    d3.json("data/herr_der_ringe_test.json", function(error, json) {
+      if (error) throw error
+
+      force
+          .nodes(json.nodes)
+          .links(json.links)
+          .start()
+
+      // erzeugt die Links
+      var link = canvas.selectAll(".link")
+          .data(json.links)
+          .enter()
+            .append("line")
+            .attr("class", "link")
+              .style("opacity", function(d) { return (10 - d.distance) / 10 }) // opacity der Linien
+
+      // erzeugt die Nodes
+      var node = canvas.selectAll(".node")
+          .data(json.nodes)
+          .enter()
+            .append("g")
+            .attr("class", "node")
+            .call(force.drag)
+
+      // Hover (mouseover)
+      node.on("mouseover", function(d) {
+
+          // opacity der Links
+          link.style("opacity", function(l) {
+              if (!(d === l.source || d === l.target)) { // wenn l NICHT mit source oder target übereinstimmt
+                return 0.05 // opacity der Links runter
+              } else {
+                return function(d) { return (10 - d.distance) / 10 } // berechnet ganz normal die opacity
+              }
+            })
+
+          // stroke-width der Links
+          link.style("stroke-width", function(l) {
+              if (d === l.source || d === l.target) { // wenn l mit source oder target übereinstimmt
+                return 4 // stroke-width auf 4
+              } else {
+                return 2 // stroke-width bleibt 2
+              }
+            })
+
+          /* opacity der Nodes (läuft nicht)
+          node.style("opacity", function(l) {
+              if (!(d === l.source || d === l.target)) { // wenn l NICHT mit source oder target übereinstimmt
+                return 0.05 // opacity der Links runter
+              } else {
+                return 1 // berechnet ganz normal die opacity
+              }
+            }) */
+
+          })
+
+      // Hover (mouseout)
+      node.on("mouseout", function() {
+        link.style("opacity", function(d) { return (10 - d.distance) / 10 }) // Hover Ende: normales berechnen der opacitys
+        link.style("stroke-width", 2) // Hover Ende: stroke-width wieder normal auf 2
+        node.style("opacity", 1)
+      })
+
+      // pattern für Circle Background
+      node.append("defs")
+                  .append("pattern")
+                    .attr("id", "bg")
+                    .attr("width", 16)
+                    .attr("height", 16)
+                       .append("svg:image")
+                        .attr("xlink:href", function(d) { return d.photo })
+                        .attr("width", 32)
+                        .attr("height", 32)
+
+      // erzeugt die Circles
+      node.append("circle")
+            .attr("r", radius)
+            .attr("fill", "url(#bg)")
+
+      // erzeugt die Text Labels
+      node.append("text")
+          .attr("dx", radius + 4)
+          .attr("dy", ".35em")
+          .text( function(d) { return d.name} )
+
+      // force functions
+      force.on("tick", function() {
+        link.attr("x1", function(d) { return d.source.x; })
+            .attr("y1", function(d) { return d.source.y; })
+            .attr("x2", function(d) { return d.target.x; })
+            .attr("y2", function(d) { return d.target.y; })
+
+        node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
+      })
+    })
+
+    console.log("Läuft")
+
+    </script>
+
+  </body>
+</html>

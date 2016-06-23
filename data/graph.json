@@ -1,0 +1,24 @@
+{"nodes":[
+	{"name":"Donatus",  "lastname":"", "photo": "img/placeholder_01.png"},
+	{"name":"Silas",    "lastname":"", "photo": "img/placeholder_02.png"},
+	{"name":"Gudrun",   "lastname":"", "photo": "img/placeholder_01.png"},
+	{"name":"Kristian", "lastname":"", "photo": "img/placeholder_02.png"},
+	{"name":"Elke",     "lastname":"", "photo": "img/placeholder_01.png"},
+	{"name":"Roger",    "lastname":"", "photo": "img/placeholder_02.png"},
+	{"name":"Meike",    "lastname":"", "photo": "img/placeholder_01.png"},
+	{"name":"Louis",    "lastname":"", "photo": "img/placeholder_02.png"},
+	{"name":"Lilli",    "lastname":"", "photo": "img/placeholder_01.png"}
+],
+
+"links":[
+	{"source": 0,"target": 2, "distance": "5"},
+	{"source": 0,"target": 3, "distance": "3"},
+	{"source": 1,"target": 2, "distance": "1"},
+	{"source": 1,"target": 3, "distance": "2"},
+	{"source": 3,"target": 4, "distance": "8"},
+	{"source": 4,"target": 5, "distance": "10"},
+	{"source": 4,"target": 6, "distance": "8"},
+	{"source": 5,"target": 3, "distance": "4"},
+	{"source": 6,"target": 7, "distance": "7"},
+	{"source": 6,"target": 8, "distance": "6"}
+]}
