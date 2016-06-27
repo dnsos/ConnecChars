@@ -1,0 +1,88 @@
+{"info":[
+	{"primaryColor":  ""},
+	{"secondaryColor":""},
+	{"fontColor":     ""},
+	{"fontFamily":    ""},
+	{"logo":					""}
+]}
+
+{"nodes":[
+	{"name":"Gollum",        "lastname":"Sméagol",        "photo": "img_herr_der_ringe/Gollum.jpg"},
+	{"name":"Legolas",       "lastname":"Grünblatt",      "photo": "img_herr_der_ringe/Legolas.jpg"},
+	{"name":"Aragorn",       "lastname":"",               "photo": "img_herr_der_ringe/Aragorn.jpg"},
+	{"name":"Gandalf",       "lastname":"",               "photo": "img_herr_der_ringe/Gandalf.jpg"},
+	{"name":"Galadriel",     "lastname":"",               "photo": "img_herr_der_ringe/Galadriel.jpg"},
+	{"name":"Tauriel",       "lastname":"",               "photo": "img_herr_der_ringe/Tauriel.jpg"},
+	{"name":"Thorin",        "lastname":"Eichenschild",   "photo": "img_herr_der_ringe/Thorin.jpg"},
+	{"name":"Arwen",         "lastname":"",               "photo": "img_herr_der_ringe/Arwen.jpg"},
+	{"name":"Thranduil",     "lastname":"",               "photo": "img_herr_der_ringe/Thranduil.jpg"},
+	{"name":"Azog",          "lastname":"",               "photo": "img_herr_der_ringe/Azog.jpg"},
+	{"name":"Bilbo",         "lastname":"Beutlin",        "photo": "img_herr_der_ringe/Bilbo.jpg"},
+	{"name":"Saruman",       "lastname":"",               "photo": "img_herr_der_ringe/Saruman.jpg"},
+	{"name":"Gimli",         "lastname":"",               "photo": "img_herr_der_ringe/Gimli.jpg"},
+	{"name":"Frodo",         "lastname":"Beutlin",        "photo": "img_herr_der_ringe/Frodo.jpg"},
+	{"name":"Kíli",          "lastname":"",               "photo": "img_herr_der_ringe/Kili.jpg"},
+	{"name":"Boromir",       "lastname":"",               "photo": "img_herr_der_ringe/Boromir.jpg"},
+	{"name":"Elrond",        "lastname":"",               "photo": "img_herr_der_ringe/Elrond.jpg"},
+	{"name":"Balin",         "lastname":"",               "photo": "img_herr_der_ringe/Balin.jpg"}
+],
+
+"links":[
+	{"source":  0,"target": 10, "distance": 8},
+	{"source":  0,"target": 13, "distance": 5},
+
+	{"source":  1,"target":  2, "distance": 4},
+	{"source":  1,"target":  3, "distance": 8},
+	{"source":  1,"target":  5, "distance": 2},
+	{"source":  1,"target":  6, "distance": 2},
+	{"source":  1,"target":  8, "distance": 1},
+	{"source":  1,"target": 10, "distance": 7},
+	{"source":  1,"target": 12, "distance": 4},
+	{"source":  1,"target": 13, "distance": 5},
+	{"source":  1,"target": 15, "distance": 9},
+
+
+	{"source":  2,"target":  3, "distance": 6},
+	{"source":  2,"target":  7, "distance": 7},
+	{"source":  2,"target": 12, "distance": 4},
+	{"source":  2,"target": 13, "distance": 7},
+	{"source":  2,"target": 15, "distance": 8},
+
+	{"source":  3,"target":  4, "distance": 3},
+	{"source":  3,"target":  6, "distance": 6},
+	{"source":  3,"target": 10, "distance": 8},
+	{"source":  3,"target": 11, "distance": 9},
+	{"source":  3,"target": 12, "distance": 10},
+	{"source":  3,"target": 13, "distance": 9},
+	{"source":  3,"target": 14, "distance": 1},
+	{"source":  3,"target": 16, "distance": 6},
+	{"source":  3,"target": 15, "distance": 9},
+	{"source":  3,"target": 17, "distance": 7},
+
+	{"source":  4,"target": 11, "distance": 4},
+	{"source":  4,"target": 12, "distance": 6},
+	{"source":  4,"target": 13, "distance": 7},
+	{"source":  4,"target": 16, "distance": 8},
+
+	{"source":  5,"target":  8, "distance": 1},
+
+	{"source":  6,"target":  9, "distance": 7},
+	{"source":  6,"target": 10, "distance": 4},
+	{"source":  6,"target": 14, "distance": 3},
+	{"source":  6,"target": 17, "distance": 8},
+
+	{"source":  7,"target": 16, "distance": 9},
+
+	{"source": 10,"target": 13, "distance": 5},
+	{"source": 10,"target": 14, "distance": 7},
+	{"source": 10,"target": 17, "distance": 2},
+
+	{"source": 11,"target": 16, "distance": 4},
+
+	{"source": 12,"target": 13, "distance": 7},
+	{"source": 12,"target": 15, "distance": 9},
+
+	{"source": 13,"target": 15, "distance": 5},
+
+	{"source": 14,"target": 17, "distance": 2}
+]}
