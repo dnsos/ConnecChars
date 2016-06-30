@@ -13,10 +13,17 @@
     <script>
 
     // variablen
-    var cWidth  = 1280
-    var cHeight = 760
+    /* var cWidth  = 1280
+    var cHeight = 760 */
     var radius = 16
     var primaryColor = "rgb(0, 0, 0)"
+    var cWidth = window.innerWidth
+    || document.documentElement.clientWidth
+    || document.body.clientWidth
+
+    var cHeight = window.innerHeight
+    || document.documentElement.clientHeight
+    || document.body.clientHeight
 
     // erzeugt den canvas
     var canvas = d3.select("body").append("svg")
