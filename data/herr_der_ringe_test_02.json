@@ -4,9 +4,9 @@
 	{"fontColor":     ""},
 	{"fontFamily":    ""},
 	{"logo":					""}
-]}
+],
 
-{"nodes":[
+"nodes":[
 	{"name":"Gollum",        "lastname":"Sméagol",        "photo": "img_herr_der_ringe/Gollum.jpg"},
 	{"name":"Legolas",       "lastname":"Grünblatt",      "photo": "img_herr_der_ringe/Legolas.jpg"},
 	{"name":"Aragorn",       "lastname":"",               "photo": "img_herr_der_ringe/Aragorn.jpg"},
