@@ -16,7 +16,7 @@
     var cWidth  = 1280
     var cHeight = 760
     var radius = 16
-    var primaryColor = "rgb(210, 15, 15)"
+    var primaryColor = "rgb(0, 0, 0)"
 
     // erzeugt den canvas
     var canvas = d3.select("body").append("svg")
@@ -114,7 +114,13 @@
       // erzeugt die Text Labels
       node.append("text")
           .attr("dx", radius + 4)
-          .attr("dy", "-.2em")
+          .attr("dy", function(d) {
+            if (d.lastname.length === 0) {
+              return ".35em"
+            } else {
+              return "-.1em"
+            }
+          })
           .text( function(d) { return d.name} )
 
       node.append("text")
