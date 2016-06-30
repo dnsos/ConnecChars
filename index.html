@@ -5,6 +5,7 @@
     <title>Force Layout Test</title>
 
     <link rel="stylesheet" href="css/style.css">
+    <link href="fonts/Yanone_Kaffeesatz_Light.woff" rel="stylesheet">
     <script src="js/d3.min.js"></script>
 
   </head>
@@ -12,11 +13,6 @@
 
     <script>
 
-    // variablen
-    /* var cWidth  = 1280
-    var cHeight = 760 */
-    var radius = 16
-    var primaryColor = "rgb(0, 0, 0)"
     var cWidth = window.innerWidth
     || document.documentElement.clientWidth
     || document.body.clientWidth
@@ -25,10 +21,23 @@
     || document.documentElement.clientHeight
     || document.body.clientHeight
 
+    var radius = 16
+    var primaryColor = "rgb(0, 0, 0)"
+    var secondaryColor = "rgb(31, 42, 81)"
+
     // erzeugt den canvas
     var canvas = d3.select("body").append("svg")
         .attr("width",  cWidth)
         .attr("height", cHeight)
+        .style("background", secondaryColor)
+
+    d3.select("canvas").append("svg")
+        .attr("xlink:href", "img/herr_der_ringe_logo.svg")
+        .attr("width", 100)
+        .attr("width", 300)
+        .style("fill", primaryColor)
+        .attr("x", 5)
+        .attr("y", 5)
 
     // erzeugt das force layout
     var force = d3.layout.force()
@@ -78,7 +87,7 @@
           // stroke-width der Links
           link.style("stroke-width", function(l) {
               if (d === l.source || d === l.target) { // wenn l mit source oder target übereinstimmt
-                return 4 // stroke-width auf 4
+                return 3 // stroke-width auf 4
               } else {
                 return 2 // stroke-width bleibt 2
               }
