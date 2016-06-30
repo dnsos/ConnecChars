@@ -24,7 +24,9 @@
 	{"name":"Kíli",          "lastname":"",               "photo": "img_herr_der_ringe/Kili.jpg"},
 	{"name":"Boromir",       "lastname":"",               "photo": "img_herr_der_ringe/Boromir.jpg"},
 	{"name":"Elrond",        "lastname":"",               "photo": "img_herr_der_ringe/Elrond.jpg"},
-	{"name":"Balin",         "lastname":"",               "photo": "img_herr_der_ringe/Balin.jpg"}
+	{"name":"Balin",         "lastname":"",               "photo": "img_herr_der_ringe/Balin.jpg"},
+	{"name":"Test",         "lastname":"",               "photo": "img_herr_der_ringe/Balin.jpg"}
+	
 ],
 
 "links":[
