@@ -76,7 +76,11 @@
       node.on("mouseover", function(d) {
 
           // opacity der Links
-          link.style("opacity", function(l) {
+          link
+          .transition()
+          .ease("quad")
+          .duration(150)
+          .style("opacity", function(l) {
               if (!(d === l.source || d === l.target)) { // wenn l NICHT mit source oder target übereinstimmt
                 return 0.05 // opacity der Links runter
               } else {
@@ -85,7 +89,8 @@
             })
 
           // stroke-width der Links
-          link.style("stroke-width", function(l) {
+          link
+          .style("stroke-width", function(l) {
               if (d === l.source || d === l.target) { // wenn l mit source oder target übereinstimmt
                 return 3 // stroke-width auf 4
               } else {
@@ -106,9 +111,19 @@
 
       // Hover (mouseout)
       node.on("mouseout", function() {
-        link.style("opacity", function(d) { return (10 - d.distance) / 10 }) // Hover Ende: normales berechnen der opacitys
-        link.style("stroke-width", 2) // Hover Ende: stroke-width wieder normal auf 2
-        node.style("opacity", 1)
+
+        link
+        .transition()
+        .ease("quad")
+        .duration(150)
+        .style("opacity", function(d) { return (10 - d.distance) / 10 }) // Hover Ende: normales berechnen der opacitys
+
+        link
+        .style("stroke-width", 2) // Hover Ende: stroke-width wieder normal auf 2
+
+        node
+        .style("opacity", 1)
+
       })
 
       // pattern für Circle Background
