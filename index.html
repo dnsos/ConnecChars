@@ -31,13 +31,14 @@
         .attr("height", cHeight)
         .style("background", secondaryColor)
 
+    // erstellt das Logo
     canvas.append("svg:image")
         .attr("xlink:href", "img/herr_der_ringe_logo.svg")
         .attr("width", 200)
         .attr("height", 90)
-        .style("fill", primaryColor)
         .attr("x", 25)
         .attr("y", 25)
+        .style("fill", primaryColor)
 
     // erzeugt das force layout
     var force = d3.layout.force()
@@ -63,6 +64,8 @@
             .append("line")
             .attr("class", "link")
               .style("opacity", function(d) { return (10 - d.distance) / 10 }) // opacity der Linien
+              .style("stroke", primaryColor)
+              .style("stroke-width", 2)
 
       // erzeugt die Nodes
       var node = canvas.selectAll(".node")
@@ -156,11 +159,13 @@
             }
           })
           .text( function(d) { return d.name} )
+          .style("fill", primaryColor)
 
       node.append("text")
           .attr("dx", radius + 4)
           .attr("dy", ".9em")
           .text( function(d) { return d.lastname} )
+          .style("fill", primaryColor)
 
       // force functions
       force.on("tick", function() {
