@@ -22,8 +22,8 @@
     || document.body.clientHeight
 
     var radius = 16
-    var primaryColor = "rgb(0, 0, 0)"
-    var secondaryColor = "rgb(31, 42, 81)"
+    var primaryColor   = "rgb(187, 197, 234)"
+    var secondaryColor = "rgb( 31,  42,  81)"
 
     // erzeugt den canvas
     var canvas = d3.select("body").append("svg")
@@ -125,7 +125,13 @@
       // erzeugt die Circles
       node.append("circle")
             .attr("r", radius)
-            .attr("fill", "url(#bg)")
+            .attr("fill", function(d) {
+              if (d.photo.length === 0) {
+                return primaryColor
+              } else {
+                return "url(#bg)"
+              }
+            })
 
       // erzeugt die Text Labels
       node.append("text")
