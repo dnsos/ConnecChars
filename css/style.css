@@ -3,10 +3,18 @@ html, body {
   padding: 0;
 }
 
+* text {
+  pointer-events: none;
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+  font-weight: 300;
+}
+
 .link {}
 
 .node text {
-  pointer-events: none;
-  font: 16px 'Yanone Kaffeesatz', sans-serif;
-  font-weight: 300;
+  font-size: 16px;
+}
+
+.legend text {
+  font-size: 12px;
 }

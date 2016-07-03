@@ -36,10 +36,53 @@
     canvas.append("svg:image")
         .attr("xlink:href", "img/herr_der_ringe_logo.svg")
         .attr("width", 200)
-        .attr("height", 90)
+        .attr("height", 60)
         .attr("x", 25)
         .attr("y", 25)
         .style("fill", primaryColor)
+
+    // erstellt die Legende
+    var legendWidth = 120
+    var legendHeight = 5
+    var legendOffset = 50
+
+    var legend = canvas.append("g")
+                        .attr("class", "legend")
+
+    legend.append("rect") // erstellt das rect
+          .attr("width", legendWidth)
+          .attr("height", legendHeight)
+          .attr("x", cWidth - (legendWidth + legendOffset))
+          .attr("y", cHeight - legendOffset)
+            .style("fill", "url(#linear-gradient)")
+
+    legend.append("text") // für das Textlabel
+          .attr("dx", cWidth - (legendWidth + legendOffset))
+          .attr("dy", cHeight - (legendOffset * 0.5))
+          .text("Verbindungsintensität")
+          .style("fill", "white")
+
+    // erstellt die defs für die Legende
+    var legendDefs = legend.append("defs")
+
+    var linearGradient = legendDefs.append("linearGradient") // erstellt das gradient Element
+          .attr("id", "linear-gradient")
+
+    linearGradient // direction des gradients
+          .attr("x1", "0%")
+          .attr("y1", "0%")
+          .attr("x2", "100%")
+          .attr("y2", "0%")
+
+    linearGradient.append("stop") // Farb-Startpunkt
+            .attr("offset", "0%")
+            .attr("stop-color", primaryColor)
+            .attr("stop-opacity", 0.05)
+
+    linearGradient.append("stop") // Farb-Endpunkt
+            .attr("offset", "100%")
+            .attr("stop-color", primaryColor)
+            .attr("stop-opacity", 1)
 
     // erzeugt das force layout
     var force = d3.layout.force()
