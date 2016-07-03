@@ -3,14 +3,10 @@ html, body {
   padding: 0;
 }
 
-.link {
-  stroke: rgba(187, 197, 234, 0.75);
-  stroke-width: 2px;
-}
+.link {}
 
 .node text {
   pointer-events: none;
   font: 16px 'Yanone Kaffeesatz', sans-serif;
   font-weight: 300;
-  fill: rgb(187, 197, 234);
 }

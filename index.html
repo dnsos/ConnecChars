@@ -22,8 +22,9 @@
     || document.body.clientHeight
 
     var radius = 16
-    var primaryColor   = "rgb(187, 197, 234)"
-    var secondaryColor = "rgb( 31,  42,  81)"
+
+    var primaryColor = "rgb(187, 197, 234)"
+    var secondaryColor = "rgb(31, 42, 81)"
 
     // erzeugt den canvas
     var canvas = d3.select("body").append("svg")
@@ -31,13 +32,14 @@
         .attr("height", cHeight)
         .style("background", secondaryColor)
 
-    d3.select("canvas").append("svg")
+    // erstellt das Logo
+    canvas.append("svg:image")
         .attr("xlink:href", "img/herr_der_ringe_logo.svg")
-        .attr("width", 100)
-        .attr("width", 300)
+        .attr("width", 200)
+        .attr("height", 90)
+        .attr("x", 25)
+        .attr("y", 25)
         .style("fill", primaryColor)
-        .attr("x", 5)
-        .attr("y", 5)
 
     // erzeugt das force layout
     var force = d3.layout.force()
@@ -63,6 +65,8 @@
             .append("line")
             .attr("class", "link")
               .style("opacity", function(d) { return (10 - d.distance) / 10 }) // opacity der Linien
+              .style("stroke", primaryColor)
+              .style("stroke-width", 2)
 
       // erzeugt die Nodes
       var node = canvas.selectAll(".node")
@@ -76,7 +80,11 @@
       node.on("mouseover", function(d) {
 
           // opacity der Links
-          link.style("opacity", function(l) {
+          link
+          .transition()
+          .ease("quad")
+          .duration(150)
+          .style("opacity", function(l) {
               if (!(d === l.source || d === l.target)) { // wenn l NICHT mit source oder target übereinstimmt
                 return 0.05 // opacity der Links runter
               } else {
@@ -85,20 +93,24 @@
             })
 
           // stroke-width der Links
-          link.style("stroke-width", function(l) {
+          link
+          .style("stroke-width", function(l) {
               if (d === l.source || d === l.target) { // wenn l mit source oder target übereinstimmt
-                return 3 // stroke-width auf 4
+                return 3 // stroke-width auf 3
               } else {
                 return 2 // stroke-width bleibt 2
               }
             })
 
           /* opacity der Nodes (läuft nicht)
-          node.style("opacity", function(l) {
-              if (!(d === l.source || d === l.target)) { // wenn l NICHT mit source oder target übereinstimmt
-                return 0.05 // opacity der Links runter
+          console.log(d.index)
+          node
+          .style("opacity", function(linksTest) {
+              var linksTest = json.links
+              if (!(d.index === linksTest.source || d.index === linksTest.target)) {
+                return 0.05 // opacity der Nodes runter
               } else {
-                return 1 // berechnet ganz normal die opacity
+                return 1 // opacity der Nodes bleibt
               }
             }) */
 
@@ -106,9 +118,19 @@
 
       // Hover (mouseout)
       node.on("mouseout", function() {
-        link.style("opacity", function(d) { return (10 - d.distance) / 10 }) // Hover Ende: normales berechnen der opacitys
-        link.style("stroke-width", 2) // Hover Ende: stroke-width wieder normal auf 2
-        node.style("opacity", 1)
+
+        link
+        .transition()
+        .ease("quad")
+        .duration(150)
+        .style("opacity", function(d) { return (10 - d.distance) / 10 }) // Hover Ende: normales berechnen der opacitys
+
+        link
+        .style("stroke-width", 2) // Hover Ende: stroke-width wieder normal auf 2
+
+        node
+        .style("opacity", 1)
+
       })
 
       // pattern für Circle Background
@@ -144,11 +166,13 @@
             }
           })
           .text( function(d) { return d.name} )
+          .style("fill", primaryColor)
 
       node.append("text")
           .attr("dx", radius + 4)
           .attr("dy", ".9em")
           .text( function(d) { return d.lastname} )
+          .style("fill", primaryColor)
 
       // force functions
       force.on("tick", function() {
