@@ -1,12 +1,13 @@
+{"info":[
+	{"primaryColor":  	"rgb(187, 197, 234)"},
+	{"secondaryColor":	"rgb(31, 42, 81)"},
+	{"neutralColor":		"rgb(255, 255, 255)"},
+	{"font":    				"sans-serif"},
+	{"logo":						"img/herr_der_ringe_logo.svg"}
+],
 
 
-
-
-
-
-
-
-{"nodes":[
+"nodes":[
 	{"name":"Gollum",        "lastname":"Smeagol",        "photo": "img/herr_der_ringe_bilder/Gollum.jpg"},
 	{"name":"Legolas",       "lastname":"Grünblatt",      "photo": "img/herr_der_ringe_bilder/Legolas.jpg"},
 	{"name":"Aragorn",       "lastname":"",               "photo": "img/herr_der_ringe_bilder/Aragorn.jpg"},

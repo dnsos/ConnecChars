@@ -12,7 +12,7 @@
   <body>
 
     <script>
-
+    // Variablen für Canvas-Größe und Größe der Circles
     var cWidth = window.innerWidth
     || document.documentElement.clientWidth
     || document.body.clientWidth
@@ -21,80 +21,82 @@
     || document.documentElement.clientHeight
     || document.body.clientHeight
 
-    var radius = 16
-
-    var primaryColor = "rgb(187, 197, 234)"
-    var secondaryColor = "rgb(31, 42, 81)"
-
-    // erzeugt den canvas
-    var canvas = d3.select("body").append("svg")
-        .attr("width",  cWidth)
-        .attr("height", cHeight)
-        .style("background", secondaryColor)
-
-    // erstellt das Logo
-    canvas.append("svg:image")
-        .attr("xlink:href", "img/herr_der_ringe_logo.svg")
-        .attr("width", 200)
-        .attr("height", 60)
-        .attr("x", 25)
-        .attr("y", 25)
-        .style("fill", primaryColor)
-
-    // erstellt die Legende
-    var legendWidth = 120
-    var legendHeight = 5
-    var legendOffset = 50
-
-    var legend = canvas.append("g")
-                        .attr("class", "legend")
-
-    legend.append("rect") // erstellt das rect
-          .attr("width", legendWidth)
-          .attr("height", legendHeight)
-          .attr("x", cWidth - (legendWidth + legendOffset))
-          .attr("y", cHeight - legendOffset)
-            .style("fill", "url(#linear-gradient)")
-
-    legend.append("text") // für das Textlabel
-          .attr("dx", cWidth - (legendWidth + legendOffset))
-          .attr("dy", cHeight - (legendOffset * 0.5))
-          .text("Verbindungsintensität")
-          .style("fill", "white")
-
-    // erstellt die defs für die Legende
-    var legendDefs = legend.append("defs")
-
-    var linearGradient = legendDefs.append("linearGradient") // erstellt das gradient Element
-          .attr("id", "linear-gradient")
-
-    linearGradient // direction des gradients
-          .attr("x1", "0%")
-          .attr("y1", "0%")
-          .attr("x2", "100%")
-          .attr("y2", "0%")
-
-    linearGradient.append("stop") // Farb-Startpunkt
-            .attr("offset", "0%")
-            .attr("stop-color", primaryColor)
-            .attr("stop-opacity", 0.05)
-
-    linearGradient.append("stop") // Farb-Endpunkt
-            .attr("offset", "100%")
-            .attr("stop-color", primaryColor)
-            .attr("stop-opacity", 1)
+    var circleRadius = 16
 
     // erzeugt das force layout
     var force = d3.layout.force()
         .gravity(0.05) // "gravity" zum center des canvas
         .linkDistance( function(d) { return d.distance * 30 }) // links distance
-        .charge(-400) // fürs abstoßen der Nodes?!
+        .charge(-400) // fürs abstoßen der Nodes
         .size([cWidth, cHeight])
-
 
     // holt sich die Daten
     d3.json("data/herr_der_ringe.json", function(error, json) {
       if (error) throw error
+
+      // Infos zu Farben/Schrift etc. werden initialisiert
+      var primaryColor = json.info[0].primaryColor
+      var secondaryColor = json.info[1].secondaryColor
+      var neutralColor = json.info[2].neutralColor
+      var fontFamily = json.info[3].font
+      var logo = json.info[4].logo
+
+      // erzeugt den canvas
+      var canvas = d3.select("body").append("svg")
+          .attr("width",  cWidth)
+          .attr("height", cHeight)
+          .style("background", secondaryColor)
+
+      canvas.append("svg:image")
+          .attr("xlink:href", logo)
+          .attr("width", 200)
+          .attr("height", 60)
+          .attr("x", 25)
+          .attr("y", 25)
+
+      // erstellt die Legende
+      var legendWidth = 120
+      var legendHeight = 5
+      var legendOffset = 50
+
+      var legend = canvas.append("g")
+                          .attr("class", "legend")
+
+      legend.append("rect") // erstellt das rect
+            .attr("width", legendWidth)
+            .attr("height", legendHeight)
+            .attr("x", cWidth - (legendWidth + legendOffset))
+            .attr("y", cHeight - legendOffset)
+              .style("fill", "url(#linear-gradient)")
+
+      legend.append("text") // für das Textlabel
+            .attr("dx", cWidth - (legendWidth + legendOffset))
+            .attr("dy", cHeight - (legendOffset * 0.5))
+            .text("Verbindungsintensität")
+            .style("font-family", fontFamily)
+            .style("fill", neutralColor)
+
+      // erstellt die defs für die Legende
+      var legendDefs = legend.append("defs")
+
+      var linearGradient = legendDefs.append("linearGradient") // erstellt das gradient Element
+            .attr("id", "linear-gradient")
+
+      linearGradient // direction des gradients
+            .attr("x1", "0%")
+            .attr("y1", "0%")
+            .attr("x2", "100%")
+            .attr("y2", "0%")
+
+      linearGradient.append("stop") // Farb-Startpunkt
+              .attr("offset", "0%")
+              .attr("stop-color", primaryColor)
+              .attr("stop-opacity", 0.05)
+
+      linearGradient.append("stop") // Farb-Endpunkt
+              .attr("offset", "100%")
+              .attr("stop-color", primaryColor)
+              .attr("stop-opacity", 1)
 
       force
           .nodes(json.nodes)
@@ -146,7 +148,10 @@
                         .concat([d])
           node
             .filter(n => filteredNodes.indexOf(n) === -1)
-            .style("opacity", 0.2)
+            .transition()
+            .ease("quad")
+            .duration(150)
+            .style("opacity", 0.05)
 
           })
 
@@ -163,6 +168,9 @@
         .style("stroke-width", 2) // Hover Ende: stroke-width wieder normal auf 2
 
         node
+        .transition()
+        .ease("quad")
+        .duration(150)
         .style("opacity", 1)
 
       })
@@ -180,7 +188,7 @@
 
       // erzeugt die Circles
       node.append("circle")
-            .attr("r", radius)
+            .attr("r", circleRadius)
             .attr("fill", function(d) {
               if (d.photo.length === 0) {
                 return primaryColor
@@ -191,7 +199,7 @@
 
       // erzeugt die Text Labels
       node.append("text")
-          .attr("dx", radius + 4)
+          .attr("dx", circleRadius + 4)
           .attr("dy", function(d) {
             if (d.lastname.length === 0) {
               return ".35em"
@@ -200,12 +208,14 @@
             }
           })
           .text( function(d) { return d.name} )
+          .style("font-family", fontFamily)
           .style("fill", primaryColor)
 
       node.append("text")
-          .attr("dx", radius + 4)
+          .attr("dx", circleRadius + 4)
           .attr("dy", ".9em")
           .text( function(d) { return d.lastname} )
+          .style("font-family", fontFamily)
           .style("fill", primaryColor)
 
       // force functions
