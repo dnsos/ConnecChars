@@ -5,7 +5,7 @@
     <title>Force Layout Test</title>
 
     <link rel="stylesheet" href="css/style.css">
-    <link href="fonts/Yanone_Kaffeesatz_Light.woff" rel="stylesheet">
+    <link href="fonts/Yanone_Kaffeesatz_Light.woff" rel="stylesheet" type="text/css">
     <script src="js/d3.min.js"></script>
 
   </head>
@@ -137,25 +137,16 @@
 
           // stroke-width der Links
           link
-          .style("stroke-width", function(l) {
-              if (d === l.source || d === l.target) { // wenn l mit source oder target übereinstimmt
-                return 3 // stroke-width auf 3
-              } else {
-                return 2 // stroke-width bleibt 2
-              }
-            })
+          .filter(l => d === l.source || d === l.target)
+          .style("stroke-width", 3)
 
-          /* opacity der Nodes (läuft nicht)
-          console.log(d.index)
+          // opacity der Nodes
+          var filteredNodes = json.links.filter(obj => obj.source.index === d.index).map(obj => obj.target)
+                        .concat(json.links.filter(obj => obj.target.index === d.index).map(obj => obj.source))
+                        .concat([d])
           node
-          .style("opacity", function(linksTest) {
-              var linksTest = json.links
-              if (!(d.index === linksTest.source || d.index === linksTest.target)) {
-                return 0.05 // opacity der Nodes runter
-              } else {
-                return 1 // opacity der Nodes bleibt
-              }
-            }) */
+            .filter(n => filteredNodes.indexOf(n) === -1)
+            .style("opacity", 0.2)
 
           })
 
