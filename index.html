@@ -177,14 +177,14 @@
 
       // pattern für Circle Background
       node.append("defs")
-                  .append("pattern")
-                    .attr("id", "bg")
-                    .attr("width", 16)
-                    .attr("height", 16)
-                       .append("svg:image")
-                        .attr("xlink:href", function(d) { return d.photo })
-                        .attr("width", 32)
-                        .attr("height", 32)
+            .append("pattern")
+              .attr("id", "bg")
+              .attr("width", circleRadius)
+              .attr("height", circleRadius)
+                 .append("svg:image")
+                  .attr("xlink:href", function(d) { return d.photo })
+                  .attr("width", circleRadius*2)
+                  .attr("height", circleRadius*2)
 
       // erzeugt die Circles
       node.append("circle")
